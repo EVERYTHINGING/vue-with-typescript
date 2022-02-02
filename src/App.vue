@@ -2,44 +2,43 @@
   <div class="app">
     <header>
       <div class="title">
-        <img src="./assets/heart.svg" alt="site logo">
-        <h1>Hyrule Jobs</h1>
+        <h1>Michael Parisi Portfolio</h1>
       </div>
       <div class="order">
-        <button @click="handleClick('title')">Order by title</button>
-        <button @click="handleClick('salary')">Order by salary</button>
-        <button @click="handleClick('location')">Order by location</button>
+        <button @click="handleClick('title')">Order by type</button>
+        <button @click="handleClick('type')">Order by type</button>
+        <button @click="handleClick('id')">Order by id</button>
       </div>
     </header>
 
-    <JobList :jobs="jobs" :order="order" />
+    <Grid :items="items" :order="order" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Job from '@/types/Job'
-import OrderTerm from '@/types/OrderTerm'
-import JobList from './components/JobList.vue'
+import ItemStruct from '@/types/ItemStruct'
+import OrderTermStruct from '@/types/OrderTermStruct'
+import Grid from '@/components/Grid.vue'
 
 export default defineComponent({
   name: 'App',
-  components: { JobList },
+  components: { Grid },
   setup() {
-    const jobs = ref<Job[]>([
-      { title: 'farm worker', location: 'lon lon ranch', salary: 30000, id: '1' },
-      { title: 'quarryman', location: 'death mountain', salary: 40000, id: '2' },
-      { title: 'flute player', location: 'the lost woods', salary: 35000, id: '3' },
-      { title: 'fisherman', location: 'lake hylia', salary: 21000, id: '4' },
-      { title: 'prison guard', location: 'gerudo valley', salary: 32000, id: '5' }
+    const items = ref<ItemStruct[]>([
+      { title: 'farm worker', type: 'drawing', image: '', description: '', id: 0 },
+      { title: 'quarryman', type: 'drawing', image: '', description: '', id: 0 },
+      { title: 'flute player', type: 'drawing', image: '', description: '', id: 0 },
+      { title: 'fisherman', type: 'drawing', image: '', description: '', id: 0 },
+      { title: 'prison guard', type: 'drawing', image: '', description: '', id: 0 }
     ])
-    const order = ref<OrderTerm>('title')
+    const order = ref<OrderTermStruct>('title')
 
-    const handleClick = (term: OrderTerm) => {
+    const handleClick = (term: OrderTermStruct) => {
       order.value = term
     }
 
-    return { jobs, order, handleClick }
+    return { items, order, handleClick }
   }
 });
 </script>
